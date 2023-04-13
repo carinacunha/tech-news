@@ -51,7 +51,6 @@ def scrape_news(html_content):
         "category": selector.css(".meta-category a span.label::text").get(),
     }
 
-
     return infos
 
 
