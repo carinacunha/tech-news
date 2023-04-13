@@ -38,7 +38,7 @@ def scrape_news(html_content):
     selector = Selector(html_content)
     infos = {
         "url": selector.css("link[rel='canonical']::attr(href)").get(),
-        "title": selector.css(".entry-title::text").get().strip(),
+        "title": selector.css("h1.entry-title::text").get().strip(),
         "timestamp": selector.css("li.meta-date::text").get(),
         "writer": selector.css(
             "li.meta-author span.author a::text"
@@ -47,7 +47,9 @@ def scrape_news(html_content):
             "li.meta-reading-time::text"
         ).get().split("minutos")[0]),
         "summary": "".join(selector.css(
-            ".entry-content > p:nth-of-type(1)::text").getall()).strip(),
+                        ".entry-content > p:nth-of-type(1) ::text"
+                    ).getall()
+            ).strip(),
         "category": selector.css(".meta-category a span.label::text").get(),
     }
 
